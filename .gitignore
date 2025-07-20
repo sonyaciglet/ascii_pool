@@ -1,5 +1,2 @@
-# ignore files without extensions
-!*.*
-
 # ignore object files
 *.o

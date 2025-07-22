@@ -28,7 +28,7 @@ int main() {
 
     TWindowCursor cursor(win);
     TPlayingField playingField;
-    auto [field_matrix, color_matrix] = playingField.BuildFieldMatrix();
+    auto field_matrix = playingField.BuildFieldMatrix();
     std::cerr << "drawing field" << std::endl;
 
     start_color();
@@ -38,10 +38,10 @@ int main() {
         int counter = 0;
         for (int row_idx = 0; row_idx < field_matrix.size(); ++row_idx) {
             for (int col_idx = 0; col_idx < field_matrix[0].size(); ++col_idx) {
-                auto color = color_matrix[row_idx][col_idx];
+                auto color = field_matrix[row_idx][col_idx].Color;
                 setcolor(win, TColorPair(color));
                 // wprintw(win, "%c", elem);
-                auto elem = field_matrix[row_idx][col_idx];
+                auto elem = field_matrix[row_idx][col_idx].Character;
                 mvwaddch(win, row_idx, col_idx, elem);
                 unsetcolor(win, TColorPair(color));
                 counter++;

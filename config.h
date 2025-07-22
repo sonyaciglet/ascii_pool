@@ -1,6 +1,6 @@
 #pragma once
 
-struct Config {
+inline struct Config {
     uint8_t WIDTH = 80;
     uint8_t HEIGHT = 50;
     char BOX_CHAR = '@';

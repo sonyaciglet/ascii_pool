@@ -4,7 +4,19 @@
 
 #include <utility>
 
-short curs_color(int fg)
+enum EColor {
+    Yellow,
+    Blue,
+    Red,
+    Purple,
+    Orange,
+    Green,
+    Maroon,
+    Black,
+    White,
+};
+
+inline short curs_color(int fg)
 {
     switch (7 & fg) {           /* RGB */
     case 0:                     /* 000 */
@@ -28,7 +40,7 @@ short curs_color(int fg)
     }
 }
 
-int colornum(int fg, int bg)
+inline int colornum(int fg, int bg)
 {
     int B, bbb, ffff;
 
@@ -46,7 +58,18 @@ class TColorPair{
     TColorPair(uint8_t fg, uint8_t bg): foreground(fg), background(bg) {}
 };
 
-void init_colorpairs(void) {
+const std::unordered_map<EColor, TColorPair> COLOR_MAP = {
+    {EColor::Yellow, TColorPair(0b110, 0b110)},
+    {EColor::Blue, TColorPair(0b011, 0b011)},
+    {EColor::Red, TColorPair(0b100, 0b100)},
+    {EColor::Purple, TColorPair(0b101, 0b101)},
+    {EColor::Orange, TColorPair(0b110, 0b100)}, {EColor::Green, TColorPair(0b1010, 0b010)},
+    {EColor::Maroon, TColorPair(0b001, 0b001)},
+    {EColor::Black, TColorPair(0b1000, 0b000)},
+    {EColor::White, TColorPair(0b111, 0b111)},
+};
+
+inline void init_colorpairs(void) {
     int fg, bg;
     int colorpair;
 
@@ -58,10 +81,10 @@ void init_colorpairs(void) {
     }
 }
 
-void setcolor(WINDOW* win, TColorPair colorPair) {
+inline void setcolor(WINDOW* win, TColorPair colorPair) {
     wattron(win, COLOR_PAIR(colornum(colorPair.foreground, colorPair.background)));
 }
 
-void unsetcolor(WINDOW* win, TColorPair colorPair) {
+inline void unsetcolor(WINDOW* win, TColorPair colorPair) {
     wattroff(win, COLOR_PAIR(colornum(colorPair.foreground, colorPair.background)));
 }

@@ -1,5 +1,6 @@
 # ignore object files
 *.o
+*.swp
 
 # ignore bin dir
 bin/

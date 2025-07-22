@@ -62,7 +62,7 @@ class TPlayingField {
             : Radius_(CONFIG.BALL_RADIUS)
             , Id_(ballId)
             , Pos_(position)
-            , BallSprite_(TFieldMatrix(Radius_, std::vector<TFieldCell>(Radius_)))
+            , BallSprite_(TFieldMatrix(Radius_ * 2, std::vector<TFieldCell>(Radius_ * 2)))
         {
             DrawBall();
         }
